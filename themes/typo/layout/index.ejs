@@ -1,10 +1,10 @@
 <div class="post-list">
   <% page.posts.each(function (post) { %>
   <section class="post-item">
-    <a class="post-item-title" href="<%- url_for(post.path) %>"><%= post.title %></a>
+    <a class="post-item-title" href="<%- relative_url(page.path, post.path) %>"><%= post.title %></a>
     <div class="post-item-summary">
       <%- strip_html(post.excerpt || post.content).substr(0, 240) %>
-      <a class="read-more" href="<%- url_for(post.path) %>"> ... </a>
+      <a class="read-more" href="<%- relative_url(page.path, post.path) %>"> ... </a>
     </div>
     <div class="post-item-extra">
       <div class="date"><%- date(post.date, "YYYY.MM.DD") %></div>

@@ -1,9 +1,9 @@
 <header class="header">
   <section class="header-container">
-    <a class="logo" href="<%- url_for() %>"><%= config.title %></a>
+    <a class="logo" href="<%- relative_url(page.path, 'index.html') %>"><%= config.title %></a>
     <ul class="nav">
       <% for (name in theme.menu) { %>
-      <li><a href="<%- url_for(theme.menu[name]) %>"><%= name %></a></li>
+      <li><a href="<%- relative_url(page.path, theme.menu[name].replace(/^\//, '')) %>"><%= name %></a></li>
       <% } %>
     </ul>
   </section>

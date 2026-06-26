@@ -10,7 +10,7 @@
   </title>
 
   <% if (theme.favicon){ %>
-  <%- favicon_tag(theme.favicon) %>
+  <link rel="shortcut icon" href="<%- relative_url(page.path, theme.favicon.replace(/^\//, '')) %>">
   <% } %>
 
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -25,7 +25,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
 
-  <%- css('css/root.css') %>
-  <%- css('css/style.css') %>
-  <%- css('css/post.css') %>
+  <link rel="stylesheet" href="<%- relative_url(page.path, 'css/root.css') %>">
+  <link rel="stylesheet" href="<%- relative_url(page.path, 'css/style.css') %>">
+  <link rel="stylesheet" href="<%- relative_url(page.path, 'css/post.css') %>">
 </head>

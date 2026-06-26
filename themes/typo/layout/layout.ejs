@@ -8,7 +8,7 @@
     <%- body %>
   </main>
   <%- partial('_partial/footer') %>
-  <%- js('js/theme.js') %>
+  <script src="<%- relative_url(page.path, 'js/theme.js') %>"></script>
 </body>
 
 </html>
