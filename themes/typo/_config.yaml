@@ -1,0 +1,7 @@
+favicon: /images/favicon.ico
+icon: /images/favicon.ico
+
+menu:
+  归档: /archives
+
+copyright: 'Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> | Content licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans">CC BY-NC 4.0</a> | Generated with AI assistance'
