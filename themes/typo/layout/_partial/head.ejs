@@ -13,17 +13,43 @@
   <link rel="shortcut icon" href="<%- relative_url(page.path, theme.favicon.replace(/^\//, '')) %>">
   <% } %>
 
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <% if (is_post()){ %>
-  <link id="theme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css">
-  <script src="https://unpkg.com/@highlightjs/cdn-assets@11.9.0/highlight.min.js"></script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link
+    id="theme"
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/styles/atom-one-light.min.css"
+    data-cdn-light="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/styles/atom-one-light.min.css"
+    data-cdn-dark="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/styles/atom-one-dark.min.css"
+    data-local-light="<%- relative_url(page.path, 'vendor/highlight/styles/atom-one-light.min.css') %>"
+    data-local-dark="<%- relative_url(page.path, 'vendor/highlight/styles/atom-one-dark.min.css') %>"
+    onerror="this.onerror=null;this.href=this.dataset.localLight"
+  >
+  <script
+    src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js"
+    onload="window.highlightCodeBlocks&&window.highlightCodeBlocks()"
+    onerror="this.onerror=null;this.src='<%- relative_url(page.path, 'vendor/highlight/highlight.min.js') %>'"
+  ></script>
   <% } %>
 
-  <!-- 字体 -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+  <% if (is_post() && page.mathjax){ %>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+  </script>
+  <script
+    async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"
+    onerror="this.onerror=null;this.src='<%- relative_url(page.path, 'vendor/mathjax/es5/tex-svg.js') %>'"
+  ></script>
+  <% } %>
 
   <link rel="stylesheet" href="<%- relative_url(page.path, 'css/root.css') %>">
   <link rel="stylesheet" href="<%- relative_url(page.path, 'css/style.css') %>">

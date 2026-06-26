@@ -36,17 +36,31 @@ function switchThemeMode(mode) {
     return;
   }
 
-  const nextMode = themeMode[mode] || themeMode.light;
-  if (link.href !== nextMode) {
+  const nextMode = getThemeUrl(link, mode, "cdn");
+  const fallbackMode = getThemeUrl(link, mode, "local");
+  link.onerror = () => {
+    link.onerror = null;
+    link.href = fallbackMode;
+  };
+
+  if (link.getAttribute("href") !== nextMode) {
     link.href = nextMode;
   }
 }
 
-const themeMode = {
-  light:
-    "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-light.css",
-  dark: "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.css",
-};
+function getThemeUrl(link, mode, source) {
+  const themeMode = mode === "dark" ? "dark" : "light";
+  const datasetKey =
+    source === "local"
+      ? `local${capitalize(themeMode)}`
+      : `cdn${capitalize(themeMode)}`;
+
+  return link.dataset[datasetKey] || link.dataset.cdnLight || link.href;
+}
+
+function capitalize(value) {
+  return value.charAt(0).toUpperCase() + value.slice(1);
+}
 
 if (checkIsDarkMode()) {
   switchThemeMode("dark");
